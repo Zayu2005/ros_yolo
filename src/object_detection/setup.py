@@ -25,6 +25,7 @@ setup(
     entry_points={
         'console_scripts': [
             'camera_publisher = object_detection.camera_publisher:main',
+            'image_subscriber = object_detection.image_subscriber:main',
         ],
     },
 )
