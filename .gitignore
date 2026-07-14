@@ -1,1 +1,53 @@
+# ROS 2 build artifacts
+/build/
+/install/
+/log/
+
+# Accidental builds from inside src/
+/src/build/
+/src/install/
+/src/log/
+
+# Python cache and packaging artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments and local configuration
+.venv/
+venv/
+env/
+.conda/
+.env
+.env.*
+!.env.example
+
+# YOLO model weights and generated results
+*.pt
+*.onnx
+*.engine
+/runs/
+/datasets/
+/weights/
+
+# Camera and application output
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.jpg
+*.jpeg
+*.png
+
+# ROS and system-generated files
+.ros/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Word documents are kept locally unless explicitly forced
 *.docx
