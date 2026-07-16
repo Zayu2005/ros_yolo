@@ -1,0 +1,3 @@
+# Keep NumPy 1.x for compatibility with ROS2 Humble cv_bridge.
+numpy<2
+ultralytics>=8.0.0,<9.0.0

@@ -17,6 +17,7 @@ __pycache__/
 .ruff_cache/
 
 # Virtual environments and local configuration
+.vscode/
 .venv/
 venv/
 env/

@@ -1,0 +1,24 @@
+usb_cam:
+  ros__parameters:
+    video_device: "/dev/video0"
+    io_method: "mmap"
+    pixel_format: "mjpeg2rgb"
+    image_width: 1280
+    image_height: 720
+    framerate: 30.0
+
+camera_publisher:
+  ros__parameters:
+    input_topic: "/usb_cam/image_raw"
+    output_topic: "/camera/image_raw"
+    override_frame_id: ""
+    log_every_n_frames: 100
+
+yolo_subscriber:
+  ros__parameters:
+    image_topic: "/camera/image_raw"
+    model_path: "yolov8n.pt"
+    confidence: 0.3
+    device: "auto"
+    window_name: "YOLOv8 Detection"
+    show_fps: true
