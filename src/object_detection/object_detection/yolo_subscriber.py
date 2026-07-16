@@ -44,6 +44,7 @@ class YoloSubscriber(Node):
         self.smoothed_fps = None
         self.first_frame_received = False
         self.display_error_reported = False
+        self.shutdown_requested = False
 
         self.get_logger().info(
             f"正在加载YOLOv8模型：{self.model_path}"
@@ -77,6 +78,9 @@ class YoloSubscriber(Node):
 
     def image_callback(self, message):
         """Convert one image, run inference, and display the result."""
+        if self.shutdown_requested:
+            return
+
         started_at = time.perf_counter()
 
         try:
@@ -148,11 +152,24 @@ class YoloSubscriber(Node):
             return
 
         if key in (ord("q"), 27):
+            self.shutdown_requested = True
             self.get_logger().info("收到退出指令，正在关闭节点")
+            self.close_display()
             rclpy.shutdown()
 
+    def close_display(self):
+        """Close OpenCV windows and flush pending GUI events."""
+        try:
+            cv2.destroyAllWindows()
+
+            # HighGUI processes window destruction through its event loop.
+            for _ in range(5):
+                cv2.waitKey(1)
+        except cv2.error:
+            pass
+
     def destroy_node(self):
-        cv2.destroyAllWindows()
+        self.close_display()
         super().destroy_node()
 
 

@@ -1,6 +1,7 @@
 import os
 
 from ament_index_python.packages import get_package_share_directory
+from launch.actions import Shutdown
 from launch import LaunchDescription
 from launch_ros.actions import Node
 
@@ -34,6 +35,9 @@ def generate_launch_description():
                 name="yolo_subscriber",
                 output="screen",
                 parameters=[params_file],
+                on_exit=Shutdown(
+                    reason="YOLOv8 detection node exited",
+                ),
             ),
         ]
     )

@@ -23,6 +23,7 @@ class ImageSubscriber(Node):
 
         self.bridge = CvBridge()
         self.first_frame_received = False
+        self.shutdown_requested = False
 
         self.subscription = self.create_subscription(
             Image,
@@ -37,6 +38,9 @@ class ImageSubscriber(Node):
 
     def image_callback(self, message):
         """Convert one ROS2 image message and display it."""
+        if self.shutdown_requested:
+            return
+
         try:
             frame = self.bridge.imgmsg_to_cv2(
                 message,
@@ -66,11 +70,24 @@ class ImageSubscriber(Node):
             return
 
         if key in (ord("q"), 27):
+            self.shutdown_requested = True
             self.get_logger().info("收到退出指令，正在关闭节点")
+            self.close_display()
             rclpy.shutdown()
 
+    def close_display(self):
+        """Close OpenCV windows and flush pending GUI events."""
+        try:
+            cv2.destroyAllWindows()
+
+            # HighGUI processes window destruction through its event loop.
+            for _ in range(5):
+                cv2.waitKey(1)
+        except cv2.error:
+            pass
+
     def destroy_node(self):
-        cv2.destroyAllWindows()
+        self.close_display()
         super().destroy_node()
 
 
