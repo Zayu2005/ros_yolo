@@ -1,0 +1,21 @@
+phenet_subscriber:
+  ros__parameters:
+    rgb_topic: "/drone/rgb/image_raw"
+    infrared_topic: "/drone/infrared/image_raw"
+
+    # WSL2下的项目绝对路径，请按实际用户名和工作空间修改。
+    model_path: "/mnt/e/Code/Project/ros2/models/phenet/PHENet.pt"
+    backend_path: "/mnt/e/Code/Project/ros2/third_party/yolov11_rgbt"
+    imgsz: 640
+    confidence: 0.25
+    iou: 0.7
+    device: "auto"
+    half: false
+    max_det: 300
+
+    sync_queue_size: 10
+    sync_slop: 0.05
+    resize_infrared: true
+
+    window_name: "PHENet RGB-T OBB Detection"
+    show_fps: true

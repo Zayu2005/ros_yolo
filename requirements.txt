@@ -1,3 +1,9 @@
 # Keep NumPy 1.x for compatibility with ROS2 Humble cv_bridge.
 numpy<2
-ultralytics>=8.0.0,<9.0.0
+einops>=0.7
+efficientnet-pytorch>=0.7.1
+PyWavelets>=1.4
+timm>=0.9
+# PHENet depends on the modified YOLOv11-RGBT runtime bundled in this repo.
+# Install this local package instead of the upstream ultralytics wheel.
+-e ./third_party/yolov11_rgbt
