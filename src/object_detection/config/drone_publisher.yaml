@@ -1,0 +1,21 @@
+drone_data_publisher:
+  ros__parameters:
+    # 修改为开发板上DroneVehicle数据集的实际绝对路径。
+    rgb_directory: "/home/ubuntu/datasets/DroneVehicle/rgb"
+    infrared_directory: "/home/ubuntu/datasets/DroneVehicle/infrared"
+
+    rgb_topic: "/drone/rgb/image_raw"
+    infrared_topic: "/drone/infrared/image_raw"
+    publish_rate: 10.0
+    loop_playback: true
+
+    rgb_frame_id: "rgb_camera_frame"
+    infrared_frame_id: "infrared_camera_frame"
+    log_every_n_frames: 50
+    image_extensions:
+      - ".jpg"
+      - ".jpeg"
+      - ".png"
+      - ".bmp"
+      - ".tif"
+      - ".tiff"

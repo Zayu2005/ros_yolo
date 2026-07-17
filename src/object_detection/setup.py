@@ -32,6 +32,7 @@ setup(
     entry_points={
         'console_scripts': [
             'camera_publisher = object_detection.camera_publisher:main',
+            'drone_data_publisher = object_detection.drone_data_publisher:main',
             'image_subscriber = object_detection.image_subscriber:main',
             'yolo_subscriber = object_detection.yolo_subscriber:main',
         ],
